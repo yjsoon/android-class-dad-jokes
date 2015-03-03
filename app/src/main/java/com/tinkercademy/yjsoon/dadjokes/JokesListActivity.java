@@ -1,12 +1,12 @@
 package com.tinkercademy.yjsoon.dadjokes;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 
-public class JokesListActivity extends ActionBarActivity {
+public class JokesListActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
