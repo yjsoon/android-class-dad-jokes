@@ -17,6 +17,11 @@ public class Joke {
         mSeen = false;
     }
 
+    @Override
+    public String toString() {
+        return mTitle;
+    }
+
     public String getTitle() {
         return mTitle;
     }
