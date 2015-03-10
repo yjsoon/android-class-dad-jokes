@@ -1,8 +1,13 @@
 package com.tinkercademy.yjsoon.dadjokes;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class JokesListActivity extends ListActivity {
@@ -18,11 +23,48 @@ public class JokesListActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jokes_list);
 
-        ArrayAdapter<Joke> adapter;
+        mJokes[0].setSeen(true); // for testing purposes
 
-        adapter = new ArrayAdapter<Joke>(this, android.R.layout.simple_list_item_1, mJokes);
+        JokeAdapter adapter;
+
+        adapter = new JokeAdapter(this, R.layout.list_item_joke, mJokes);
         setListAdapter(adapter);
 
+    }
+
+    private class JokeAdapter extends ArrayAdapter<Joke> {
+
+        private int mResource;
+        private Joke[] mJokes;
+
+        public JokeAdapter(Context context, int resource, Joke[] jokes) {
+            super(context, resource, jokes);
+            mResource = resource;
+            mJokes = jokes;
+        }
+
+        @Override
+        public View getView(int position, View row, ViewGroup parent) {
+            if (row == null) { // this lets Android recycle the row if necessary
+                row = getLayoutInflater().inflate(mResource, parent, false);
+            }
+
+            Joke currentJoke = mJokes[position]; // get the joke at this position
+
+            TextView textView = (TextView) row.findViewById(R.id.list_text);
+            // set the text
+            textView.setText(currentJoke.getTitle());
+
+            ImageView imageView = (ImageView) row.findViewById(R.id.list_graphic);
+            // set the image based on whether it's been seen
+            if (currentJoke.isSeen()) {
+                imageView.setImageResource(R.drawable.check);
+            } else {
+                imageView.setImageResource(R.drawable.exclamation);
+            }
+
+            return row;
+        }
     }
 
 }
