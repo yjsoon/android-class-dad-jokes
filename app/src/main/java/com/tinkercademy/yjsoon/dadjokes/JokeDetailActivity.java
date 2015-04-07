@@ -10,8 +10,7 @@ import android.widget.TextView;
 public class JokeDetailActivity extends ActionBarActivity {
 
     private boolean mTappedOnce = false;
-    public static final String JOKE_DETAIL_TEXT = "com.tinkercademy.yjsoon.dadjokes.joke_detail_text";
-    public static final String JOKE_DETAIL_PUNCHLINE = "com.tinkercademy.yjsoon.dadjokes.joke_punchline";
+    public static final String JOKE_PARCEL = "com.tinkercademy.yjsoon.dadjokes.joke_parcel";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,13 +19,13 @@ public class JokeDetailActivity extends ActionBarActivity {
 
         View jokeDetailView = findViewById(R.id.joke_detail_view);
         TextView jokeText = (TextView) findViewById(R.id.joke_text);
-        // note -- this needs to be "final" to be accessible in a listener
-        // see http://stackoverflow.com/questions/4732544/why-are-only-final-variables-accessible-in-anonymous-class
         final TextView jokePunchline = (TextView) findViewById(R.id.punchline_text);
 
         Intent intent = getIntent();
-        jokeText.setText(intent.getStringExtra(JOKE_DETAIL_TEXT));
-        jokePunchline.setText(intent.getStringExtra(JOKE_DETAIL_PUNCHLINE));
+        Joke joke = (Joke) intent.getParcelableExtra(JOKE_PARCEL);
+
+        jokeText.setText(joke.getQuestion());
+        jokePunchline.setText(joke.getAnswer());
 
         jokeDetailView.setOnClickListener(new View.OnClickListener() {
             @Override

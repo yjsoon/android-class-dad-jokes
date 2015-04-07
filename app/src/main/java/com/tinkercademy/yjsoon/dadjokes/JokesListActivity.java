@@ -38,8 +38,7 @@ public class JokesListActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Intent intent = new Intent(this, JokeDetailActivity.class);
-        intent.putExtra(JokeDetailActivity.JOKE_DETAIL_TEXT, mJokes[position].getQuestion());
-        intent.putExtra(JokeDetailActivity.JOKE_DETAIL_PUNCHLINE, mJokes[position].getAnswer());
+        intent.putExtra(JokeDetailActivity.JOKE_PARCEL, mJokes[position]);
         startActivity(intent);
     }
 
