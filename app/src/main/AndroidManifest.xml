@@ -16,6 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".JokeDetailActivity"
+            android:label="@string/title_activity_joke_detail"
+            android:parentActivityName=".JokesListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tinkercademy.yjsoon.dadjokes.JokesListActivity" />
+        </activity>
     </application>
 
 </manifest>

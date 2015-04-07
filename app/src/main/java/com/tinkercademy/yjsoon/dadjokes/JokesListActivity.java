@@ -2,11 +2,13 @@ package com.tinkercademy.yjsoon.dadjokes;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -30,6 +32,15 @@ public class JokesListActivity extends ListActivity {
         adapter = new JokeAdapter(this, R.layout.list_item_joke, mJokes);
         setListAdapter(adapter);
 
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Intent intent = new Intent(this, JokeDetailActivity.class);
+        intent.putExtra(JokeDetailActivity.JOKE_DETAIL_TEXT, mJokes[position].getQuestion());
+        intent.putExtra(JokeDetailActivity.JOKE_DETAIL_PUNCHLINE, mJokes[position].getAnswer());
+        startActivity(intent);
     }
 
     private class JokeAdapter extends ArrayAdapter<Joke> {
